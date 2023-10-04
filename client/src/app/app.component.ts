@@ -9,14 +9,14 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'client';
 
-  weatherForecasts: any;
+  posts: any;
 
   constructor(private http: HttpClient){
   
   }
   ngOnInit(): void {
-    this.http.get('http://localhost:5197/weatherforecast').subscribe(
-      response => {this.weatherForecasts = response;},
+    this.http.get('http://localhost:5197/api/posts').subscribe(
+      response => {this.posts = response;},
       error => {console.log(error)}
     );
   }
