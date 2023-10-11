@@ -20,9 +20,82 @@ namespace API.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// GET api/posts
+        /// </summary>
+        /// <returns>A list of posts</returns>
         [HttpGet(Name = "GetPosts")]
         public ActionResult<List<Post>> Get(){
             return _context.Posts.ToList();
+        }
+
+
+        /// <summary>
+        /// GET api/posts/[id]
+        /// </summary>
+        /// <param name="id">Post id<</param>
+        /// <returns>A single post</returns>
+        [HttpGet("{id}", Name = "GetById")]
+        public ActionResult<Post> GetById(Guid id)
+        {
+            var post = _context.Posts.Find(id);
+            
+            if(post is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(post);
+        }
+
+
+        /// <summary>
+        /// POST api/post
+        /// </summary>
+        /// <param name="request">JSON request with post fields</param>
+        /// <returns>The new post</returns>
+        [HttpPost(Name = "CreatePost")]
+        public ActionResult<Post> Create([FromBody]Post request)
+        {
+            var post = new Post
+            {
+                Id = request.Id,
+                Title = request.Title,
+                Body = request.Body,
+                Date = request.Date
+            };
+
+            _context.Posts.Add(post);
+            var success = _context.SaveChanges() > 0;
+
+            if(success)
+            {
+                return Ok(post);
+            }
+
+            throw new Exception("Error creating new post");
+        }
+
+        [HttpPut(Name = "UpdatePost")]
+        public ActionResult<Post> Update([FromBody] Post request)
+        {
+            var post = _context.Posts.Find(request.Id);
+            if(post == null)
+            {
+                throw new Exception("Could not find post");
+            }
+
+            post.Title = request.Title != null ? request.Title : post.Title;
+            post.Body = request.Body != null ? request.Body : post.Body;
+            post.Date = request.Date != DateTime.MinValue ? request.Date : post.Date;
+
+            var success = _context.SaveChanges() > 0;
+            if(success)
+            {
+                return Ok(post);
+            }
+
+            throw new Exception("Error updating post");
         }
     }
 }
