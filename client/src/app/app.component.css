@@ -1,0 +1,12 @@
+.post-card{
+    max-width: 400px;
+    margin: 40px auto;
+}
+.post-card:hover{
+    cursor: pointer;
+    background-color: #efefef;
+}
+
+.example-spacer{
+    flex: 1 1 auto;
+}
