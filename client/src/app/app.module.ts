@@ -9,10 +9,16 @@ import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { HomeComponent } from './home/home.component';
+import { ViewPostComponent } from './view-post/view-post.component';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    ViewPostComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,
