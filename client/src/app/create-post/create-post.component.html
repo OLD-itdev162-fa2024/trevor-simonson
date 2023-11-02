@@ -1,1 +1,14 @@
-<p>create-post works!</p>
+<form #createPostForm="ngForm" {ngSubmit}="createPost()" class="post-form">
+    <mat-form-field>
+        <mat-label>Input</mat-label>
+        <input matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Textarea</mat-label>
+        <textarea matInput></textarea>
+    </mat-form-field>
+    <div class="form-field">
+        <button mat-raised-button color="primary" type="submit" class="form-button">Create Post</button>
+        <button mat-raised-button color="primary" type=button class="form-button" (click)="cancel()">Cancel</button>
+    </div>
+</form>

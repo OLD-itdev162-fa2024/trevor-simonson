@@ -6,10 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-post.component.css']
 })
 export class CreatePostComponent implements OnInit {
+  model: any = {}
 
   constructor() { }
 
   ngOnInit(): void {
+
+  }
+
+  createPost(){
+    console.log(this.model);
+  }
+
+  cancel(){
+    console.log("Cancel create post");
   }
 
 }
